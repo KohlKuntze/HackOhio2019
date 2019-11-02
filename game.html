@@ -31,10 +31,11 @@
 	<script>
 		var playerNames = new Array();
 
-		playerNames.push("Freshman");
-		for (int i = 0; i < sessionStorage.length; i++) {
-			playerNames.push(sessionStorage.getItem(sessionStorage.key(i)));
-			alert(playerNames[i]);
+		for (var i = 0; i < sessionStorage.length; i++) {
+			var currentValue = sessionStorage.getItem(sessionStorage.key(i));
+			if (currentValue != 0) {
+				playerNames.push(currentValue);
+			}
 		}
 		
 
