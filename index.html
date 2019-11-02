@@ -20,25 +20,80 @@
 		<div class="modal fade" id="myModal" role="dialog">
 		    <div class="modal-dialog">
 		    
-		      <!-- Modal content-->
-			    <div class="modal-content">
-			        <div class="modal-header">
-			        	<h4 class="modal-title">Modal Header</h4>
-			        </div>
+		    	<form>
+		      		<!-- Modal content-->
+				    <div class="modal-content">
+				        <div class="modal-header">
+				        	<h4 class="modal-title">Input Game Details!</h4>
+				        </div>
 
-			        <div class="modal-body">
-			        	<p>Some text in the modal.</p>
-			        </div>
-			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-			        	<button type="button" class="btn btn-info" data-dismiss="modal">Start Game!</button>
-			        </div>
-			    </div>
-			      
+				        <div class="modal-body">
+				        	<div class="form-group row">
+					        	<label for="numOfPlayers" class="col-sm-8 col-form-label"># of Players:</label>
+					        	<div class="col-sm-4">
+						        	<select id="numOfPlayers" name="numOfPlayers" onchange="printPlayerNameBoxes(this.value)">
+				    					<option value="1">1</option>
+				    					<option value="2">2</option>
+				    					<option value="3">3</option>
+				    					<option value="4">4</option>
+			  						</select>
+		  						</div>
+	  						</div>
+				        </div>
+
+				        <div id= "player-input-area">
+				        </div>
+
+				    	</br>
+				        <div class="modal-footer">
+				        	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				        	<button type="button" class="btn btn-info" data-dismiss="modal">Start Game!</button>
+				        </div>
+				    </div>
+			    <form>  
 			</div>
 		</div>
 
 	    <script>
+	    	function printPlayerNameBoxes(numOfPlayers) {
+	    		var playerNames = {};
+	    		//alert("1");
+	    		var playerInputAreaDiv = document.getElementById("player-input-area");
+				//playerInputAreaDiv.innerHTML = "Players";
+				
+	    		playerInputAreaDiv.childNodes = new Array();
+	    		while (playerInputAreaDiv.firstChild) {
+    				playerInputAreaDiv.removeChild(playerInputAreaDiv.firstChild);
+  				}
+  				
+
+  				var currentPlayer = 1;
+
+  				while (currentPlayer <= numOfPlayers) {
+  					
+  					playerInputAreaDiv.appendChild(createPlayerNameBox(currentPlayer));
+  					currentPlayer = currentPlayer + 1;
+  				}
+				
+	    	}
+
+	    	function createPlayerNameBox(playerNumber) {
+	    		var playerBoxDiv = document.createElement("div");
+				playerBoxDiv.class = "form-group row";
+				
+				var playerBoxLabel = document.createElement("label");
+				playerBoxLabel.class = "col-sm-6 col-form-label";
+				playerBoxLabel.innerHTML = "Player " + playerNumber + " Name:";  
+				
+				var playerNameInput = document.createElement("input");
+				playerNameInput.type = "text";
+				playerNameInput.name = "playerName" + playerNumber;
+
+				playerBoxDiv.appendChild(playerBoxLabel);
+				playerBoxDiv.appendChild(playerNameInput);
+
+				return playerBoxDiv;
+	    	}
 
 	    </script>
 
