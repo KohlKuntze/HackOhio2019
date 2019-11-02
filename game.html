@@ -32,7 +32,8 @@
 		var playerNames = new Array();
 
 		playerNames.push("Freshman");
-		for (int i = 0; i < sessionStorage.length; i++) {
+		var i;
+		for (i = 0; i < sessionStorage.length; i++) {
 			playerNames.push(sessionStorage.getItem(sessionStorage.key(i)));
 			alert(playerNames[i]);
 		}

@@ -1,6 +1,7 @@
 <html>  
 	<head>  
-		<script type="text/javascript" src="message.js"></script>  
+		<script type="text/javascript" src="message.js"></script> 
+		<script type="text/javascript" src="HomePageUtilities.js"></script> 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	</head>  
 	<body>  
@@ -46,56 +47,14 @@
 				    	</br>
 				        <div class="modal-footer">
 				        	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-				        	<button type="button" class="btn btn-info" data-dismiss="modal">Start Game!</button>
+				        	<button type="button" class="btn btn-info" data-dismiss="modal" onclick="startGame()">Start Game!</button>
 				        </div>
 				    </div>
 			    <form>  
 			</div>
 		</div>
 
-	    <script>
-	    	function printPlayerNameBoxes(numOfPlayers) {
-	    		var playerNames = {};
-	    		//alert("1");
-	    		var playerInputAreaDiv = document.getElementById("player-input-area");
-				//playerInputAreaDiv.innerHTML = "Players";
-				
-	    		playerInputAreaDiv.childNodes = new Array();
-	    		while (playerInputAreaDiv.firstChild) {
-    				playerInputAreaDiv.removeChild(playerInputAreaDiv.firstChild);
-  				}
-  				
-
-  				var currentPlayer = 1;
-
-  				while (currentPlayer <= numOfPlayers) {
-  					
-  					playerInputAreaDiv.appendChild(createPlayerNameBox(currentPlayer));
-  					currentPlayer = currentPlayer + 1;
-  				}
-				
-	    	}
-
-	    	function createPlayerNameBox(playerNumber) {
-	    		var playerBoxDiv = document.createElement("div");
-				playerBoxDiv.class = "form-group row";
-				
-				var playerBoxLabel = document.createElement("label");
-				playerBoxLabel.class = "col-sm-6 col-form-label";
-				playerBoxLabel.innerHTML = "Player " + playerNumber + " Name:";  
-				
-				var playerNameInput = document.createElement("input");
-				playerNameInput.type = "text";
-				playerNameInput.name = "playerName" + playerNumber;
-
-				playerBoxDiv.appendChild(playerBoxLabel);
-				playerBoxDiv.appendChild(playerNameInput);
-
-				return playerBoxDiv;
-	    	}
-
-	    </script>
-
+	    
 		<footer class="text-white bg-dark"> 
 		<footer> 
 	</body>  
