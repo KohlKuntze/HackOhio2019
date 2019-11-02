@@ -46,7 +46,7 @@ function startGame(){
     var playerName = document.getElementById(currentPlayer).value;
     sessionStorage.setItem(playerName, playerName);
     sessionStorage.setItem(playerName+"_score", 0);
-
   }
+  
   window.location.href = "game.html";
 }

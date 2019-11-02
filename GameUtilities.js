@@ -1,9 +1,9 @@
 var playerNames = [];
 
 function playGame(playerNames) {
-	// alert("In play game");
-	createScoreboard(playerNames);
 	getPlayerNames();
+	createScoreboard();
+
 }
 
 function getPlayerNames(){
@@ -11,7 +11,6 @@ function getPlayerNames(){
     for (i = 0; i < sessionStorage.length; i++){
 		var possName = sessionStorage.getItem(sessionStorage.key(i))
 		if(possName.includes("_score")){
-			console.log(possName);
 			playerNames.push(possName);
 		}
     }
@@ -23,32 +22,88 @@ function chooseGame(){
 	chooseWinner();
 }
 
-{/* <input type="checkbox" name="foo" value="bar1"> Bar 1<br/>
-<input type="checkbox" name="foo" value="bar2"> Bar 2<br/>
-<input type="checkbox" name="foo" value="bar3"> Bar 3<br/>
-<input type="checkbox" name="foo" value="bar4"> Bar 4<br/>
- */}
 
 function chooseWinner(){
 	var playerInputAreaDiv = document.getElementById("chooseWinner");
-	var x = document.createElement("br");
 
 	for (i = 0; i < playerNames.length; i++){
-		//console.log(playerNames[i]);
-		
+		var lineBreak = document.createElement("br");
 		var playerOption = document.createElement("input");
 		playerOption.id = playerNames[i] + "_option";
 		playerOption.type = "checkbox";
 		playerOption.value = playerNames[i];
 
+		var label = document.createElement("label");
+		label.htmlFor = playerNames[i]+"_option"
+
+		label.appendChild(document.createTextNode(playerNames[i]));
+
+
 		playerInputAreaDiv.appendChild(playerOption);
-		playerInputAreaDiv.appendChild(x);
+		playerInputAreaDiv.appendChild(label);
+		playerInputAreaDiv.appendChild(lineBreak);
 	}
+	var submit = document.createElement("button");
+	submit.innerHTML = "Submit";
+	submit.onclick = addPoints;
+	playerInputAreaDiv.appendChild(submit);
 
 }
 
-function createScoreboard(playerNames) {
+function addPoints(){
+	var scoreboard = document.getElementById("scoreboard-div");
+
+	while (scoreboard.firstChild) {
+		scoreboard.removeChild(scoreboard.firstChild);
+	}
+
+	for (i = 0; i < playerNames.length; i++){
+		var currentScore = parseInt(sessionStorage.getItem(playerNames[i]+"_score"));
+
+		if(document.getElementById(playerNames[i]+"_option").checked == true){
+			currentScore = currentScore + 1;
+			sessionStorage.removeItem(playerNames[i]+"_score");
+			sessionStorage.setItem(playerNames[i]+"_score", currentScore);
+
+		}
+
+		var newScore = document.createElement("p");
+		var para = document.createTextNode(playerNames[i]+": "+currentScore);
+		newScore.appendChild(para);
+		scoreboard.appendChild(newScore);
+	}
+
+	var playerInputAreaDiv = document.getElementById("chooseWinner");
+
+	while (playerInputAreaDiv.firstChild) {
+		playerInputAreaDiv.removeChild(playerInputAreaDiv.firstChild);
+	}
+
+	//printAll();
+}
+
+
+function printAll(){
+	var i;    
+    for (i = 0; i < sessionStorage.length; i++)   {
+        console.log(sessionStorage.key(i) + "=[" + sessionStorage.getItem(sessionStorage.key(i)) + "]");
+    }
+}
+
+function createScoreboard() {
 	//alert("Constructing scoreboard");
-	var scoreBoardDiv = document.getElementById("scoreboard-div");
-	scoreBoardDiv.innerHTML = "Scoreboard";
+	var scoreBoard = document.getElementById("scoreboard-div");
+
+	while (scoreBoard.firstChild) {
+		scoreBoard.removeChild(scoreBoard.firstChild);
+	}
+
+	for (i = 0; i < playerNames.length; i++){
+
+		var newScore = document.createElement("p");
+		var para = document.createTextNode(playerNames[i]+": 0");
+		newScore.appendChild(para);
+		scoreBoard.appendChild(newScore);
+	}
+
 }
