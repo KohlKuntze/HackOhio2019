@@ -1,4 +1,6 @@
 var playerNames = [];
+var games = ["Beer Pong", "Dare ball", "Take a drink", "Flip cup", "Survivor"]
+
 
 function playGame(playerNames) {
 	getPlayerNames();
@@ -19,7 +21,21 @@ function getPlayerNames(){
 
 function chooseGame(){
 	// print out game from list
+	getGame();
 	chooseWinner();
+}
+
+function getGame(){
+	var gamesPlay = document.getElementById("currentGame");
+	var num = Math.round((Math.random() * (games.length)));
+
+	var lineBreak = document.createElement("br");
+	var newGame = document.createElement("p");
+	var para = document.createTextNode(games[num]);
+	newGame.append(para);
+	
+	gamesPlay.appendChild(newGame);
+
 }
 
 
@@ -52,9 +68,14 @@ function chooseWinner(){
 
 function addPoints(){
 	var scoreboard = document.getElementById("scoreboard-div");
+	var gamesPlay = document.getElementById("currentGame");
 
 	while (scoreboard.firstChild) {
 		scoreboard.removeChild(scoreboard.firstChild);
+	}
+
+	while (gamesPlay.firstChild) {
+		gamesPlay.removeChild(gamesPlay.firstChild);
 	}
 
 	for (i = 0; i < playerNames.length; i++){
